@@ -828,9 +828,12 @@ function copyToClipboard(provider) {
 }
 
 /**
- * Export Comparison Report as a text file
+ * Export Comparison Report in multiple formats
  */
-function exportReport() {
+function exportReport(format = 'txt') {
+    const dropdown = document.getElementById('exportDropdown');
+    if (dropdown) dropdown.style.display = 'none';
+    
     if (!window.selectedScenario) return;
 
     let report = `EMAIL EVALUATION REPORT\n`;
@@ -870,16 +873,64 @@ function exportReport() {
         report += `- Format & Conciseness: ${document.getElementById('geminiFormatConciseness').textContent}\n\n`;
     }
 
-    const blob = new Blob([report], { type: 'text/plain' });
+    const filename = `email_comparison_${window.selectedScenario.id}`;
+
+    if (format === 'txt' || format === 'md') {
+        let textData = report;
+        if (format === 'md') {
+            textData = report.replace(/=========================/g, '').replace(/-------------------------/g, '---').replace(/EMAIL EVALUATION REPORT/, '# EMAIL EVALUATION REPORT');
+        }
+        const blob = new Blob([textData], { type: 'text/plain' });
+        downloadBlob(blob, `${filename}.${format}`);
+    } else if (format === 'pdf') {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        doc.setFontSize(10);
+        const lines = doc.splitTextToSize(report, 180);
+        let cursorY = 10;
+        lines.forEach(line => {
+            if (cursorY > 280) {
+                doc.addPage();
+                cursorY = 10;
+            }
+            doc.text(line, 10, cursorY);
+            cursorY += 5;
+        });
+        doc.save(`${filename}.pdf`);
+    } else if (format === 'docx') {
+        const paragraphs = report.split('\n').map(line => new docx.Paragraph({ children: [new docx.TextRun(line)] }));
+        const doc = new docx.Document({
+            sections: [{
+                properties: {},
+                children: paragraphs
+            }]
+        });
+        docx.Packer.toBlob(doc).then(blob => {
+            downloadBlob(blob, `${filename}.docx`);
+        });
+    }
+}
+
+function downloadBlob(blob, filename) {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `email_comparison_${window.selectedScenario.id}.txt`;
+    a.download = filename;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
 }
+
+// Close export dropdown when clicking outside
+document.addEventListener('click', function(e) {
+    const dropdown = document.getElementById('exportDropdown');
+    if (!dropdown) return;
+    const btn = document.querySelector('.comparison-actions .btn');
+    if (!dropdown.contains(e.target) && e.target !== btn && !btn.contains(e.target)) {
+        dropdown.style.display = 'none';
+    }
+});
 
 /**
  * Escapes HTML characters to prevent XSS in dynamic DOM formatting

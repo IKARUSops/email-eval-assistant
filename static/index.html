@@ -4,7 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Email Generation Assistant | Results Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://unpkg.com/docx@8.2.0/build/index.js"></script>
 </head>
 <body>
     <div class="container">
@@ -106,8 +111,14 @@
         <section class="comparison-section" id="comparisonSection" style="display: none;">
             <div class="comparison-header-row">
                 <h2>Detailed Comparison: <span id="selectedScenarioId"></span></h2>
-                <div class="comparison-actions">
-                    <button class="btn btn-secondary" onclick="exportReport()">📥 Export Report</button>
+                <div class="comparison-actions" style="position: relative;">
+                    <button class="btn btn-secondary" onclick="document.getElementById('exportDropdown').style.display = document.getElementById('exportDropdown').style.display === 'block' ? 'none' : 'block'">📥 Export Report ▾</button>
+                    <div id="exportDropdown" style="display: none; position: absolute; right: 0; top: 100%; margin-top: 5px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; box-shadow: var(--shadow-md); z-index: 100; min-width: 160px; text-align: left; overflow: hidden;">
+                        <a href="#" onclick="event.preventDefault(); exportReport('txt')" style="display: block; padding: 12px 16px; color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border); transition: background 0.2s;">📝 Text (.txt)</a>
+                        <a href="#" onclick="event.preventDefault(); exportReport('md')" style="display: block; padding: 12px 16px; color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border); transition: background 0.2s;">📄 Markdown (.md)</a>
+                        <a href="#" onclick="event.preventDefault(); exportReport('pdf')" style="display: block; padding: 12px 16px; color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border); transition: background 0.2s;">📊 PDF (.pdf)</a>
+                        <a href="#" onclick="event.preventDefault(); exportReport('docx')" style="display: block; padding: 12px 16px; color: var(--text); text-decoration: none; transition: background 0.2s;">📝 Word (.docx)</a>
+                    </div>
                 </div>
             </div>
             
