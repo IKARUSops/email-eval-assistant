@@ -1,0 +1,164 @@
+[
+  {
+    "id": 1,
+    "intent": "Follow up after a meeting",
+    "key_facts": [
+      "Met Tuesday to discuss the Q3 marketing budget",
+      "Action item: send the revised budget by Friday",
+      "Next sync is scheduled for July 2nd"
+    ],
+    "tone": "formal",
+    "reference_email": "Subject: Follow-Up: Q3 Marketing Budget Discussion\n\nHi Sam,\n\nThank you for taking the time to meet on Tuesday to discuss the Q3 marketing budget. As agreed, I will send over the revised budget by this Friday. Our next sync is scheduled for July 2nd to review the updated figures.\n\nPlease let me know if anything changes on your end before then.\n\nBest regards,\nOmar",
+    "reference_source": {
+      "title": "Follow-up email after meeting: Templates and tips that work | Fyxer",
+      "url": "https://www.fyxer.com/blog/follow-up-email-after-meeting",
+      "note": "Structural guidance only (recap discussion, confirm action items with owners/deadlines, send same day) -- body text is original, not copied."
+    }
+  },
+  {
+    "id": 2,
+    "intent": "Request for proposal details",
+    "key_facts": [
+      "Need pricing tiers for the enterprise plan",
+      "Require data security and compliance documentation",
+      "Response is needed by end of next week"
+    ],
+    "tone": "formal",
+    "reference_email": "Subject: Request for Additional Proposal Details\n\nDear Ms. Carter,\n\nThank you for sending over the initial proposal. Before we proceed, could you share the pricing tiers for the enterprise plan along with your data security and compliance documentation?\n\nWe would appreciate receiving this information by end of next week so we can finalize our review.\n\nKind regards,\nOmar",
+    "reference_source": {
+      "title": "5 great RFP email templates to copy & paste | Flodesk Tips",
+      "url": "https://flodesk.com/tips/rfp-email-templates",
+      "note": "Structural guidance only (direct subject line, concise body pointing to specifics) -- body text is original, not copied."
+    }
+  },
+  {
+    "id": 3,
+    "intent": "Apology for a shipping delay",
+    "key_facts": [
+      "Order #4521 is delayed due to a supplier shortage",
+      "New expected delivery date is June 25",
+      "Offering a 15% discount on the customer's next order"
+    ],
+    "tone": "empathetic",
+    "reference_email": "Subject: Update on Your Order #4521\n\nHi Mr. Reyes,\n\nI'm sorry to let you know that order #4521 has been delayed due to a shortage at our supplier. We now expect it to arrive by June 25, and I understand this isn't the news you were hoping for.\n\nAs an apology for the inconvenience, we'd like to offer you a 15% discount on your next order.\n\nThank you for your patience, and please reach out if there's anything else I can help with.\n\nWarm regards,\nOmar",
+    "reference_source": {
+      "title": "5 great shipping delay email templates to copy & paste | Flodesk Tips",
+      "url": "https://flodesk.com/tips/shipping-delay-email-templates",
+      "note": "Structural guidance only (be upfront, give a new ETA, offer a goodwill gesture) -- body text is original, not copied."
+    }
+  },
+  {
+    "id": 4,
+    "intent": "Notify a client of server downtime",
+    "key_facts": [
+      "Production server went down at 2 AM UTC",
+      "Cause identified as a failed disk",
+      "Service was restored by 4 AM UTC",
+      "A post-mortem report will follow within 48 hours"
+    ],
+    "tone": "urgent",
+    "reference_email": "Subject: Incident Notice: Production Downtime Resolved\n\nHi Team,\n\nOur production server experienced an outage starting at 2 AM UTC. The cause was identified as a failed disk, and service was fully restored by 4 AM UTC.\n\nWe are preparing a full post-mortem report, which we will share within 48 hours. We apologize for any disruption this caused.\n\nRegards,\nOmar",
+    "reference_source": {
+      "title": "Free Email Template - IT Outage & Downtime Notification | Gmelius",
+      "url": "https://gmelius.com/templates/service-downtime-announcement",
+      "note": "Structural guidance only (summary, cause, steps taken, apology, preventative follow-up) -- body text is original, not copied."
+    }
+  },
+  {
+    "id": 5,
+    "intent": "Networking introduction (cold outreach)",
+    "key_facts": [
+      "Connected through mutual contact Sarah Lee",
+      "Interested in their work in computer vision research",
+      "Would like to schedule a 20-minute call"
+    ],
+    "tone": "casual",
+    "reference_email": "Subject: Quick intro via Sarah Lee\n\nHi Dr. Khan,\n\nSarah Lee suggested I reach out, she mentioned your work in computer vision research and thought we'd have a lot to talk about.\n\nWould you be up for a quick 20-minute call sometime in the next couple of weeks? Happy to work around your schedule.\n\nLooking forward to connecting,\nOmar",
+    "reference_source": {
+      "title": "5 great networking email templates to copy & paste | Flodesk Tips",
+      "url": "https://flodesk.com/tips/networking-email-templates",
+      "note": "Structural guidance only (subject line referencing the mutual connection, message centered on the recipient) -- body text is original, not copied."
+    }
+  },
+  {
+    "id": 6,
+    "intent": "Respond to a customer complaint",
+    "key_facts": [
+      "Customer received a defective unit on June 10",
+      "A replacement unit has been shipped with expedited shipping",
+      "Tracking number is TRK998231"
+    ],
+    "tone": "empathetic",
+    "reference_email": "Subject: Your Replacement Is On Its Way\n\nHi Ms. Okafor,\n\nI'm really sorry to hear the unit you received on June 10 arrived defective, that's not the experience we want you to have.\n\nWe've already shipped a replacement via expedited shipping; you can track it with TRK998231.\n\nPlease let us know if it doesn't arrive in good condition, we'll make it right.\n\nBest,\nOmar",
+    "reference_source": {
+      "title": "10 Customer Complaint Response Templates to Resolve Every Issue | ProProfs Help Desk",
+      "url": "https://www.proprofsdesk.com/blog/customer-complaint-response-email-template/",
+      "note": "Structural guidance only (acknowledge, apologize, explain, state the fix; ship the replacement before requiring a return) -- body text is original, not copied."
+    }
+  },
+  {
+    "id": 7,
+    "intent": "Extend a job offer",
+    "key_facts": [
+      "Position is Research Engineer",
+      "Start date is July 15",
+      "Starting salary as discussed in the final interview",
+      "Offer expires in 5 business days"
+    ],
+    "tone": "formal",
+    "reference_email": "Subject: Offer of Employment: Research Engineer\n\nDear Ayesha,\n\nWe are pleased to offer you the position of Research Engineer, with a proposed start date of July 15. Your starting salary will be as discussed during your final interview.\n\nPlease note this offer is valid for 5 business days. We'd be glad to answer any questions in the meantime.\n\nCongratulations, and we look forward to your reply.\n\nSincerely,\nOmar",
+    "reference_source": {
+      "title": "Job Offer Email Template | WeCP",
+      "url": "https://www.wecreateproblems.com/email-templates/job-offer-email-template",
+      "note": "Structural guidance only (clear subject, position details, salary, start date, next steps, gratitude) -- body text is original, not copied."
+    }
+  },
+  {
+    "id": 8,
+    "intent": "Invite a colleague to an event",
+    "key_facts": [
+      "Annual tech summit is on August 14 in Dhaka",
+      "Registration closes August 1",
+      "Keynote speaker is a notable AI researcher"
+    ],
+    "tone": "casual",
+    "reference_email": "Subject: You should come to the Tech Summit!\n\nHi Tanvir,\n\nJust a heads-up, the annual tech summit is happening August 14 in Dhaka, and the keynote speaker this year is a pretty notable AI researcher.\n\nRegistration closes August 1, so grab a spot soon if you're interested. Let me know if you want to go together!\n\nCheers,\nOmar",
+    "reference_source": {
+      "title": "Event Invitation Email Templates and Examples | Eventify",
+      "url": "https://eventify.io/blog/event-invitation-email-template",
+      "note": "Structural guidance only (compelling subject line, key event details, highlighting a draw such as a speaker) -- body text is original, not copied."
+    }
+  },
+  {
+    "id": 9,
+    "intent": "Send a project status update to stakeholders",
+    "key_facts": [
+      "Project is 70% complete",
+      "Two minor bugs found in QA and currently being fixed",
+      "On track for the original July 30 deadline"
+    ],
+    "tone": "formal",
+    "reference_email": "Subject: Project Status Update\n\nDear Stakeholders,\n\nThe project is currently 70% complete. QA identified two minor bugs, which the team is actively resolving.\n\nWe remain on track to meet the original July 30 deadline and will continue to provide updates as we progress.\n\nBest regards,\nOmar",
+    "reference_source": {
+      "title": "5 Examples of Professional Status Update Emails | Status.net",
+      "url": "https://status.net/articles/examples-of-professional-status-update-emails/",
+      "note": "Structural guidance only (status, recent accomplishments/progress, upcoming work, challenges) -- body text is original, not copied."
+    }
+  },
+  {
+    "id": 10,
+    "intent": "Submit a two weeks' notice resignation",
+    "key_facts": [
+      "Last working day will be July 3",
+      "Willing to help transition responsibilities",
+      "Grateful for the opportunities over the past two years"
+    ],
+    "tone": "warm and professional",
+    "reference_email": "Subject: Resignation Notice\n\nDear Ms. Hassan,\n\nI'm writing to let you know that I'll be resigning from my position, with my last working day being July 3.\n\nI'm grateful for the opportunities I've had over the past two years, and I want to make this transition as smooth as possible, please let me know how I can help hand off my responsibilities.\n\nThank you again for everything.\n\nWarm regards,\nOmar",
+    "reference_source": {
+      "title": "Two Weeks' Notice Email - How To With Examples & Templates | Tallo",
+      "url": "https://tallo.com/adults/career-change/two-weeks-notice-email/",
+      "note": "Structural guidance only (clear resignation statement, exact last day, gratitude, transition offer) -- body text is original, not copied."
+    }
+  }
+]

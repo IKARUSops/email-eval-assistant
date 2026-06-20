@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Generation Assistant | Results Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-top">
+                <h1>📧 Email Generation Assistant</h1>
+                <button id="themeToggle" class="btn btn-secondary theme-toggle-btn" aria-label="Toggle dark mode">🌓 Theme</button>
+            </div>
+            <p class="subtitle">Compare OpenAI vs Gemini across 3 custom metrics</p>
+        </header>
+
+        <!-- Tab Navigation -->
+        <nav class="tab-navigation">
+            <button id="tabPresetBtn" class="tab-btn active" onclick="switchTab('presets')">Preset Scenarios</button>
+            <button id="tabCustomBtn" class="tab-btn" onclick="switchTab('custom')">Custom Scenario Playground</button>
+        </nav>
+
+        <!-- PRESET SCENARIOS TAB CONTENT -->
+        <div id="presetsTabContent" class="tab-content">
+            <!-- Overall Comparison Summary -->
+            <section class="summary-section">
+                <h2>Performance Summary</h2>
+                <div class="summary-grid" id="summaryGrid">
+                    <!-- Populated by JavaScript from cached results -->
+                    <div class="summary-card">Loading results...</div>
+                </div>
+            </section>
+
+            <!-- Scenario Selection -->
+            <section class="scenario-section">
+                <h2>Test Scenarios</h2>
+                <div class="scenario-list" id="scenarioList">
+                    Loading scenarios...
+                </div>
+            </section>
+        </div>
+
+        <!-- CUSTOM SCENARIOS TAB CONTENT -->
+        <div id="customTabContent" class="tab-content" style="display: none;">
+            <section class="custom-playground-section">
+                <h2>Define Custom Scenario</h2>
+                <div class="playground-layout">
+                    <form id="customScenarioForm" onsubmit="event.preventDefault(); submitCustomScenario();">
+                        <div class="form-group">
+                            <label for="customIntent">Email Intent *</label>
+                            <input type="text" id="customIntent" required placeholder="e.g. Ask a customer to fill out a feedback survey after their flight">
+                        </div>
+                        <div class="form-group">
+                            <label for="customKeyFacts">Key Facts to Include * <span class="input-hint">(One fact per line)</span></label>
+                            <textarea id="customKeyFacts" required rows="4" placeholder="e.g. Flight number AA120&#10;Survey takes under 3 minutes&#10;Get a chance to win a $50 travel voucher"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="customTone">Requested Tone *</label>
+                            <input type="text" id="customTone" required placeholder="e.g. professional, friendly, and appreciative">
+                        </div>
+                        <div class="form-group">
+                            <label for="customReferenceEmail">Reference Email <span class="input-hint">(Optional, used for Format & Conciseness scoring)</span></label>
+                            <textarea id="customReferenceEmail" rows="4" placeholder="e.g. Best-practice example email written by a human..."></textarea>
+                        </div>
+
+                        <div class="model-selection-grid">
+                            <div class="form-group">
+                                <label for="customOpenAIModel">OpenAI Model</label>
+                                <select id="customOpenAIModel" onchange="toggleCustomModelInput('openai')">
+                                    <option value="gpt-4o-mini">gpt-4o-mini (Default)</option>
+                                    <option value="gpt-4o">gpt-4o</option>
+                                    <option value="gpt-3.5-turbo">gpt-3.5-turbo</option>
+                                    <option value="custom">Custom Model Name...</option>
+                                </select>
+                                <input type="text" id="customOpenAIModelText" placeholder="Enter custom OpenAI model ID..." class="custom-model-input" style="display: none;">
+                            </div>
+                            <div class="form-group">
+                                <label for="customGeminiModel">Gemini Model</label>
+                                <select id="customGeminiModel" onchange="toggleCustomModelInput('gemini')">
+                                    <option value="gemini-3.1-flash-lite">gemini-3.1-flash-lite (Default)</option>
+                                    <option value="gemini-1.5-flash">gemini-1.5-flash</option>
+                                    <option value="gemini-1.5-pro">gemini-1.5-pro</option>
+                                    <option value="custom">Custom Model Name...</option>
+                                </select>
+                                <input type="text" id="customGeminiModelText" placeholder="Enter custom Gemini model ID..." class="custom-model-input" style="display: none;">
+                            </div>
+                            <div class="form-group">
+                                <label for="providerChoice">Providers to Run</label>
+                                <select id="providerChoice">
+                                    <option value="both">Both OpenAI & Gemini</option>
+                                    <option value="openai">OpenAI Only</option>
+                                    <option value="gemini">Gemini Only</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-generate-all">⚡ Generate & Evaluate</button>
+                    </form>
+                </div>
+            </section>
+        </div>
+
+        <!-- Detailed Comparison View -->
+        <section class="comparison-section" id="comparisonSection" style="display: none;">
+            <div class="comparison-header-row">
+                <h2>Detailed Comparison: <span id="selectedScenarioId"></span></h2>
+                <div class="comparison-actions">
+                    <button class="btn btn-secondary" onclick="exportReport()">📥 Export Report</button>
+                </div>
+            </div>
+            
+            <div class="scenario-details" id="scenarioDetails"></div>
+
+            <!-- Side-by-Side Emails -->
+            <div class="email-comparison">
+                <div class="email-column" id="openaiColumn">
+                    <div class="column-header">
+                        <h3 id="openaiHeaderTitle">🤖 OpenAI (gpt-4o-mini)</h3>
+                        <button class="btn btn-copy" onclick="copyToClipboard('openai')">📋 Copy</button>
+                    </div>
+                    <div class="email-box" id="openaiEmail">Generate to see email...</div>
+                    <button class="btn btn-secondary btn-gen-trigger" onclick="runSingleGeneration('openai')">
+                        Regenerate Email
+                    </button>
+                </div>
+
+                <div class="email-column" id="geminiColumn">
+                    <div class="column-header">
+                        <h3 id="geminiHeaderTitle">🤖 Gemini (gemini-3.1-flash-lite)</h3>
+                        <button class="btn btn-copy" onclick="copyToClipboard('gemini')">📋 Copy</button>
+                    </div>
+                    <div class="email-box" id="geminiEmail">Generate to see email...</div>
+                    <button class="btn btn-secondary btn-gen-trigger" onclick="runSingleGeneration('gemini')">
+                        Regenerate Email
+                    </button>
+                </div>
+            </div>
+
+            <!-- Metrics Comparison -->
+            <div class="metrics-section">
+                <h3>Metric Scores</h3>
+                <div class="metrics-grid">
+                    <!-- Fact Recall -->
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <h4>✅ Fact Recall</h4>
+                            <p class="metric-type">Automated • Deterministic</p>
+                        </div>
+                        <p class="metric-description">Fraction of Key Facts included in the email (token overlap ≥ 0.6)</p>
+                        <div class="score-row">
+                            <div class="score-item" id="openaiFactRecallRow">
+                                <label>OpenAI:</label>
+                                <span class="score" id="openaiFactRecall">—</span>
+                            </div>
+                            <div class="score-item" id="geminiFactRecallRow">
+                                <label>Gemini:</label>
+                                <span class="score" id="geminiFactRecall">—</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tone Fidelity -->
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <h4>🧠 Tone Fidelity</h4>
+                            <p class="metric-type">LLM-as-Judge • Cross-Judged</p>
+                        </div>
+                        <p class="metric-description">How well the email matches the requested tone (1-5 rubric, 0-1 normalized)</p>
+                        <div class="score-row">
+                            <div class="score-item" id="openaiToneFidelityRow">
+                                <label>OpenAI:</label>
+                                <span class="score" id="openaiToneFidelity">—</span>
+                            </div>
+                            <div class="score-item" id="geminiToneFidelityRow">
+                                <label>Gemini:</label>
+                                <span class="score" id="geminiToneFidelity">—</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Format & Conciseness -->
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <h4>📏 Format & Conciseness</h4>
+                            <p class="metric-type">Automated • Deterministic</p>
+                        </div>
+                        <p class="metric-description">Structure completeness + length ratio + readability (Flesch Reading Ease 45-70)</p>
+                        <div class="score-row">
+                            <div class="score-item" id="openaiFormatConcisenessRow">
+                                <label>OpenAI:</label>
+                                <span class="score" id="openaiFormatConciseness">—</span>
+                            </div>
+                            <div class="score-item" id="geminiFormatConcisenessRow">
+                                <label>Gemini:</label>
+                                <span class="score" id="geminiFormatConciseness">—</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="eval-btn-wrapper">
+                    <button id="evaluateBtn" class="btn btn-primary" onclick="evaluateBoth()">Evaluate Output</button>
+                </div>
+            </div>
+
+            <!-- Detailed Scores -->
+            <div class="details-section" id="detailsSection" style="display: none;">
+                <h3>Detailed Step-by-Step Score Breakdown</h3>
+                <div id="detailsContent" class="details-content"></div>
+            </div>
+
+            <button class="btn btn-back" onclick="backToSummary()">← Back to List</button>
+        </section>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
