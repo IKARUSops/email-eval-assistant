@@ -23,6 +23,9 @@ Three custom metrics were designed to objectively evaluate email generation qual
 ### 3. Web Dashboard & Custom Scenario Playground
 An interactive web interface is provided to visualize the evaluation results and test new scenarios on the fly.
 
+## Model Comparison & Analysis
+A comprehensive, data-driven analysis of the two models' performance (OpenAI vs. Gemini) based on the test runs can be found in [comparative_analysis.md](comparative_analysis.md). This includes the determination of the winning model, an analysis of the lower-performing model's primary failure mode, and a production recommendation.
+
 ## Setup and Installation
 
 ### Prerequisites
